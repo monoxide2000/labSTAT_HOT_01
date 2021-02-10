@@ -1,0 +1,195 @@
+---
+title: "Tarea 1 - ACP-149 - Estadística"
+author: "Julio César Ramirez-Pacheco"
+date: "2/10/2021"
+output:
+  html_document:
+    highlight: zenburn
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## El lenguaje R, vectores
+
+El lenguaje R, como se vió en sesiones anteriores tiene como un tipo de datos importante a los vectores. Los vectores atómicos se pueden generar de diversas formas, por ejemplo usando el comando `vector()` el cual toma dos parámetros, el tipo de vector atómico (`character`, `double`, etc) y el número de valores de ese tipo. Por ejemplo:
+
+
+```{r}
+# Con el comando vector generamos vectores de la siguiente manera
+vector("numeric", 5) # vector(tipo_elemento, no_de_elementos)
+```
+Además de `numeric` también podemos generar vectores del tipo `character`, `double`, `integer` y `logical`.
+
+### Actividad
+
+- Genere un vector de 10 valores tipo `integer`.
+
+```{r, eval=FALSE}
+vector(_, 10)
+```
+
+- Genere un vector de 15 valores tipo `character`
+
+```{r, eval=FALSE}
+vector("character", _)
+```
+
+
+## Generación de vectores atómicos
+
+Note que el comando `vector`, solo genera vectores con valores por defecto, por ejemplo para los del tipo `numeric` genera puros $0$s. Para generar vectores más interesantes, éstow los podemos generar mediante el comando `c()` que es una abreviación de `combine` o combinar. Por ejemplo, para generar un vector con los nombres de $5$ personas que viven en Cancún, lo podemos hacer de la siguiente forma:
+
+```{r}
+# Código para generar un vector con los nombres de 5 personas
+personas <- c("Eduardo", "Maria", "Mercedes", "Iván", "Eugenio")
+print(personas) # Con este comando imprimimos el vector personas.
+```
+
+### Actividad
+
+Genere los siguientes vectores
+
+1. Un vector con diez números enteros e imprímalos
+
+```{r, eval=FALSE}
+enteros <- c(_,_ ,_ ,_ ,_ ,_ ,_ ,_ ,_ ,_)
+print(_)
+```
+
+2. Un vector con 5 valores lógicos (`TRUE` o `FALSE`)
+
+```{r, eval=FALSE}
+logicos <- c(_,_,_,_,_)
+print(logicos)
+```
+
+
+3. Un vector con 10 nombres de compañeros de la clase.
+
+```{r, eval=FALSE}
+compClase <- c("","","","","","", "", "", "", "")
+print(_)
+```
+
+## R como calculadora
+
+R, como se vió en sesiones previas, permite realizar cálculos matemáticos tal cual fuese una calculadora. `R` permite realizar casí cualquier tipo de cálculo desde aritmética básica hasta el cálculo de la derivada de una función. Por ejemplo:
+
+```{r}
+# R como calculadora
+sin(pi)   # Cálculo del seno de pi
+sqrt(4)   # Cáculo de la raíz cuadrada de 4
+min(c(4,9)) # Valor mínimo entre 4 y 9
+```
+
+### Actividades 
+
+Hallar las siguientes cantidades usando `R`
+
+- $\cos(2 \pi)$
+
+```{r, eval=FALSE}
+cos(2*_)
+```
+
+- $\sqrt{2 \pi}/ \max{(3,2,4,1,8)}$
+
+```{r, eval=FALSE}
+sqrt(_*_)/max(c(_,_,_,_,_))
+```
+
+- $\log_{10}(10000)$
+
+```{r, eval=FALSE}
+log(_, base=10)
+```
+
+## Generando secuencias en `R`
+
+`R` permite generar secuencias de valores con el comando `seq`, el comando `seq` genera secuencias entre un valor mínimo y máximo y puede generar secuencias de acuerdo a cierto incremento (con el parámetro `by=`) o una longitud de valores entre mínimo y máximo (con el parámetro `length=`). Por ejemplo:
+
+```{r}
+# Uso del comando seq()
+seq(1,6)  # Genera valores entre 1 y 6 en intervalos de 1 (por defecto)
+seq(1,2, by=0.1) # Genera valores entre 1 y 2 en incrementos de 0.1
+seq(1,20, length=30) # Genera 30 valores entre 1 y 20
+```
+
+### Actividades
+
+Generar las siguientes secuencias:
+
+1. Una secuencia entre $0$ y $\pi$ con $10$ valores.
+
+```{r, eval=FALSE}
+seq(_,_, length=10)
+```
+
+2. Una secuencia de $10$ a $8$, con incrementos de $0.33$
+
+```{r, eval=FALSE}
+seq(10, _, by=_)
+```
+
+3. Una secuencia con valores entre $0$ y $\log_2(8)$ con $20$ valores.
+
+```{r}
+# Inserten su código abajo
+
+```
+
+
+
+## Graficando funciones con `R`
+
+Una característica muy potente de `R`es en la realización de gráficos de funciones. Para lo anterior consideraremos que una función puede graficarse a partir de su relación $y=f(t)$ o $y=f(x)$ y los valores de $x$ los podemos generar mediante `c()` o `seq()` y los valores de $y$ aplicando una función a la variable $x$. Por ejemplo, graficaremos $y=\cos(2 \pi t)$ de $-2$ a $2$.
+
+```{r}
+library(basetheme)  # para utilizar basetheme, primero instalarlo
+basetheme("deepblue") # install.packages("basetheme")
+t <- seq(-2,2, length=200)  # Generamos los valores del eje horiz.
+y <- cos(2*pi*t)           # Calculamos la función.
+plot(t,y, type="l", col="green")
+grid(col="#72efdd")      # Le agregamos lineas punteadas con color.
+```
+
+### Actividades
+
+Graficar las siguientes funciones:
+
+1. $y= |x|$ (valor absoluto de $x$) de $-2$ a $2$.
+
+```{r, eval=FALSE}
+library(basetheme)  # para utilizar basetheme, primero instalarlo
+basetheme("deepblue") # install.packages("basetheme")
+x <- seq(_,_, length=20)
+y <- abs(_)
+plot(_,_, type="l", col="_")
+grid(col="#72efdd")
+```
+
+2. $y = \mbox{e}^{-x}$ de $0$ a $2$ (función exponencial)
+
+```{r, eval=FALSE}
+library(basetheme)  # para utilizar basetheme, primero instalarlo
+basetheme("deepblue") # install.packages("basetheme")
+x <- seq(_,_, length=20)
+y <- exp(-_)
+plot(_,_, type="l", col="_")
+grid(col="#72efdd")
+```
+
+
+3. Graficar la función $y=\sqrt{x}$ de $1$ a $10$
+
+```{r, eval=FALSE}
+library(basetheme)  # para utilizar basetheme, primero instalarlo
+basetheme("deepblue") # install.packages("basetheme")
+x <- seq(_,_, length=20)
+y <- sqrt(_)
+plot(_,_, type="l", col="_")
+grid(col="#72efdd")
+```
